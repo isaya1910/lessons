@@ -20,7 +20,7 @@ class LinkedList:
 
     def print_all_nodes(self):
         node = self.head
-        while node != None:
+        while node is not None:
             print(node.value)
             node = node.next
 
@@ -47,16 +47,21 @@ class LinkedList:
         while node is not None and node.value == val:
             self.head = node.next
             node = self.head
-            if not all: return
+            if not all: break
 
         while node is not None:
             while node is not None and node.value != val:
                 prev = node
                 node = node.next
-            if node is None: return
+            if node is None: break
             prev.next = node.next
             node = prev.next
-            if not all: return
+            if not all: break
+        node = self.head
+        self.tail = self.head
+        while node is not None:
+            self.tail = node
+            node = node.next
 
     def clean(self):
         while self.head is not None:
@@ -83,3 +88,20 @@ class LinkedList:
                     node.next = newNode
                     newNode.next = temp
                 node = node.next
+
+
+def delete_test():
+    linked_list = LinkedList()
+    linked_list.add_in_tail(Node(1))
+
+    linked_list.add_in_tail(Node(3))
+    linked_list.add_in_tail(Node(3))
+    linked_list.add_in_tail(Node(5))
+    linked_list.add_in_tail(Node(5))
+    linked_list.add_in_tail(Node(5))
+
+    linked_list.delete(5, True)
+    linked_list.print_all_nodes()
+    assert linked_list.head.value == 1
+
+    assert linked_list.tail.value == 3
