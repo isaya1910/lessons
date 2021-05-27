@@ -33,7 +33,7 @@ class LinkedList2:
             if node.value == val:
                 return node
             node = node.next
-        return None  # здесь будет ваш код
+        return None
 
     def find_all(self, val):
         node = self.head
@@ -42,21 +42,22 @@ class LinkedList2:
             if node.value == val:
                 ans.append(node)
             node = node.next
-            ans.append(node)
-        return ans  # здесь будет ваш код
+        return ans
 
     def delete(self, val, all=False):
         node = self.head
-        while node is not None and node.value == val:
-            self.head = node.next
-            node = self.head
-            if not all:
-                self.update_tail()
-                return
-
         while node is not None:
             if node.value == val:
-                node.prev.next = node.next
+                prev = node.prev
+                next = node.next
+                if prev is not None:
+                    prev.next = next
+                    if next is not None:
+                        next.prev = prev
+                else:
+                    self.head = next
+                    if next is not None:
+                        next.prev = None
                 if not all:
                     self.update_tail()
                     return
@@ -66,7 +67,6 @@ class LinkedList2:
     def clean(self):
         self.head = None
         self.tail = None
-        pass  # здесь будет ваш код
 
     def len(self):
         ans = 0
@@ -74,7 +74,7 @@ class LinkedList2:
         while node is not None:
             ans = ans + 1
             node = node.next
-        return ans  # здесь будет ваш код
+        return ans
 
     def insert(self, afterNode, newNode):
         if afterNode is None:
@@ -101,6 +101,7 @@ class LinkedList2:
         newNode.next = node
         if node is not None:
             node.prev = newNode
+        self.update_tail()
 
 
 def delete_test():
@@ -119,12 +120,36 @@ def delete_test():
     assert linked_list.tail.value == 6
 
 
+delete_test()
+
+
 def clean_test():
     linked_list = LinkedList2()
     linked_list.add_in_tail(Node(5))
     linked_list.add_in_tail(Node(5))
     linked_list.clean()
     assert linked_list.len() == 0
+
+
+def find_test():
+    linked_list = LinkedList2()
+    linked_list.add_in_tail(Node(5))
+    linked_list.add_in_tail(Node(5))
+    linked_list.add_in_tail(Node(6))
+    linked_list.add_in_tail(Node(7))
+    assert linked_list.find(7).value == 7
+    assert linked_list.find(123) is None
+
+def find_test():
+    linked_list = LinkedList2()
+    linked_list.add_in_tail(Node(5))
+    linked_list.add_in_tail(Node(5))
+    linked_list.add_in_tail(Node(6))
+    linked_list.add_in_tail(Node(7))
+    assert len(linked_list.find_all(5)) == 2
+
+
+find_test()
 
 
 def insert_test():
@@ -140,6 +165,3 @@ def insert_test():
 
     linked_list.insert(None, Node(555))
     assert linked_list.tail.value == 555
-
-
-insert_test()
