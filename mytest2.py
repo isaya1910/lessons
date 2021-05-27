@@ -120,9 +120,6 @@ def delete_test():
     assert linked_list.tail.value == 6
 
 
-delete_test()
-
-
 def clean_test():
     linked_list = LinkedList2()
     linked_list.add_in_tail(Node(5))
@@ -140,6 +137,7 @@ def find_test():
     assert linked_list.find(7).value == 7
     assert linked_list.find(123) is None
 
+
 def find_test():
     linked_list = LinkedList2()
     linked_list.add_in_tail(Node(5))
@@ -147,9 +145,6 @@ def find_test():
     linked_list.add_in_tail(Node(6))
     linked_list.add_in_tail(Node(7))
     assert len(linked_list.find_all(5)) == 2
-
-
-find_test()
 
 
 def insert_test():
