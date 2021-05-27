@@ -105,22 +105,96 @@ def delete_test():
     linked_list = LinkedList()
 
     linked_list.add_in_tail(Node(5))
-    linked_list.add_in_tail(Node(7))
     linked_list.add_in_tail(Node(5))
+    linked_list.delete(5, True)
+    assert linked_list.len() == 0
+    assert linked_list.head is None
+    assert linked_list.tail is None
 
-    linked_list.print_all_nodes()
-    linked_list.delete(5, False)
-    linked_list.print_all_nodes()
-   # assert linked_list.head is None
+    linked_list.add_in_tail(Node(5))
+    linked_list.add_in_tail(Node(6))
+    linked_list.add_in_tail(Node(6))
 
-    #assert linked_list.tail is None
+    linked_list.delete(6, False)
+    assert linked_list.tail.value == 6
+    linked_list.add_in_tail(Node(6))
+    linked_list.delete(6, True)
+    assert linked_list.tail.value == 5
+
+
+delete_test()
+
 
 def clean_test():
     linked_list = LinkedList()
     linked_list.add_in_tail(Node(5))
-    linked_list.clean()
+    linked_list.add_in_tail(Node(6))
     linked_list.clean()
     assert linked_list.len() == 0
     assert linked_list.head is None
     assert linked_list.tail is None
 
+
+def find_all_test():
+    linked_list = LinkedList()
+    linked_list.add_in_tail(Node(5))
+    linked_list.add_in_tail(Node(6))
+    list = linked_list.find_all(6)
+    assert len(list) == 1
+    assert list[0].value == 6
+
+
+def len_test():
+    linked_list = LinkedList()
+    linked_list.add_in_tail(Node(5))
+    linked_list.add_in_tail(Node(6))
+    assert linked_list.len() == 2
+
+
+def insert_test():
+    linked_list = LinkedList()
+    linked_list.add_in_tail(Node(5))
+    linked_list.add_in_tail(Node(6))
+    linked_list.insert(None, Node(7))
+    assert linked_list.head.value == 7
+
+    linked_list.insert(linked_list.head, Node(5))
+    node = linked_list.find(5)
+    assert node is not None
+    assert linked_list.head.next is node
+
+
+insert_test()
+
+
+def task1_8(linked_list_1: LinkedList, linked_list_2: LinkedList):
+    ans = []
+    if linked_list_1.len() == linked_list_2.len():
+        node1 = linked_list_1.head
+        node2 = linked_list_2.head
+        while node1 is not None and node2 is not None:
+            ans.append(node1.value + node2.value)
+            node1 = node1.next
+            node2 = node2.next
+        return ans
+
+
+def task1_8_test():
+    linked_list1 = LinkedList()
+    linked_list1.add_in_tail(Node(6))
+    linked_list1.add_in_tail(Node(7))
+    linked_list1.add_in_tail(Node(7))
+
+    linked_list2 = LinkedList()
+    linked_list2.add_in_tail(Node(6))
+    linked_list2.add_in_tail(Node(7))
+    linked_list2.add_in_tail(Node(7))
+
+    ans = task1_8(linked_list1, linked_list2)
+    assert ans[0] == 12
+    linked_list1.add_in_tail(Node(5))
+    ans = task1_8(linked_list1, linked_list2)
+    assert ans is None
+
+
+task1_8_test()
