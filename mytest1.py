@@ -70,6 +70,7 @@ class LinkedList:
             if not all:
                 self.update_tail()
                 return
+        self.update_tail()
 
     def clean(self):
         while self.head is not None:
@@ -97,6 +98,7 @@ class LinkedList:
                     node.next = newNode
                     newNode.next = temp
                 node = node.next
+        self.update_tail()
 
 
 def delete_test():
