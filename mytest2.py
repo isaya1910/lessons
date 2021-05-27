@@ -109,6 +109,8 @@ def delete_test():
     linked_list.add_in_tail(Node(5))
     linked_list.add_in_tail(Node(5))
     linked_list.delete(5, False)
+    assert linked_list.tail.value == 5
+
     linked_list.add_in_tail(Node(6))
     linked_list.add_in_tail(Node(7))
     linked_list.add_in_tail(Node(6))
@@ -118,6 +120,15 @@ def delete_test():
     linked_list.add_in_tail(Node(6))
     linked_list.delete(6, False)
     assert linked_list.tail.value == 6
+
+
+def delete_test_2():
+    linked_list = LinkedList2()
+    linked_list.add_in_tail(Node(3))
+    linked_list.add_in_tail(Node(3))
+    linked_list.add_in_tail(Node(3))
+    linked_list.delete(3, True)
+    assert linked_list.len() == 0
 
 
 def clean_test():
@@ -138,13 +149,19 @@ def find_test():
     assert linked_list.find(123) is None
 
 
-def find_test():
+find_test()
+
+
+def find_all_test():
     linked_list = LinkedList2()
     linked_list.add_in_tail(Node(5))
     linked_list.add_in_tail(Node(5))
     linked_list.add_in_tail(Node(6))
     linked_list.add_in_tail(Node(7))
     assert len(linked_list.find_all(5)) == 2
+
+
+find_all_test()
 
 
 def insert_test():
