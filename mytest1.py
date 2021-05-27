@@ -42,18 +42,21 @@ class LinkedList:
         return ans  # здесь будет ваш код
 
     def delete(self, val, all=False):
-        while self.head is not None and self.head.value == val:
-            self.head = self.head.next
+        node = self.head
+        prev = None
+        while node is not None and node.value == val:
+            self.head = node.next
+            node = self.head
             if not all: return
 
-        node = self.head
-        if node is not None:
-            while node.next is not None:
-                if node.next.value == val:
-                    node.next = node.next.next
-                    if not all: return
-                else:
-                    node = node.next
+        while node is not None:
+            while node is not None and node.value != val:
+                prev = node
+                node = node.next
+            if node is None: return
+            prev.next = node.next
+            node = prev.next
+            if not all: return
 
     def clean(self):
         while self.head is not None:
