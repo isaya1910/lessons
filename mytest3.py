@@ -54,29 +54,3 @@ class DynArray:
             new_capacity = int((self.capacity * 2) / 3)
             if new_capacity >= 16:
                 self.capacity = new_capacity
-
-
-def insert_test():
-    dynArray = DynArray()
-    for i in range(40):
-        dynArray.append(11)
-    print(*dynArray)
-
-    dynArray.insert(5, 14)
-
-    print(*dynArray)
-
-
-def delete_test():
-    dynArray = DynArray()
-    dynArray.append(23)
-    dynArray.append(24)
-
-    for i in range(100):
-        dynArray.append(11)
-    print(*dynArray)
-
-    for i in range(0, 100):
-        dynArray.delete(1)
-
-    print(*dynArray)
