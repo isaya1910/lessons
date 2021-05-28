@@ -50,7 +50,10 @@ class DynArray:
         for j in range(i, self.count - 1):
             self.array[j] = self.array[j + 1]
         self.count = self.count - 1
-        if self.capacity / self.count > 2:
+        percent = self.count / self.capacity
+        if percent < 0.5:
             new_capacity = int((self.capacity * 2) / 3)
             if new_capacity >= 16:
                 self.capacity = new_capacity
+            else:
+                self.capacity = 16
