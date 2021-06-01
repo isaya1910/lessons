@@ -18,6 +18,7 @@ class MyTestCase(unittest.TestCase):
 
         ans = task1_8(linked_list1, linked_list2)
         self.assertEqual(ans[0], 12)
+        self.assertEqual(ans[1], 14)
         linked_list1.add_in_tail(Node(5))
         ans = task1_8(linked_list1, linked_list2)
         self.assertEqual(len(ans), 0)
