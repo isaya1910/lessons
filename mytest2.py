@@ -76,6 +76,8 @@ class LinkedList2(LinkedListParent):
                 self.add_in_head(new_node)
             else:
                 self.add_in_tail(new_node)
+            self.length = self.length + 1
+
         else:
             node = self._dummy_head.next
             while node is not None:
@@ -85,8 +87,8 @@ class LinkedList2(LinkedListParent):
                     new_node.prev = node
                     buff.prev = new_node
                     new_node.next = buff
+                    self.length = self.length + 1
                 node = node.next
-        self.length = self.length + 1
 
     def add_in_head(self, new_node):
         old_head = self.get_head()
