@@ -9,16 +9,18 @@ class MyTestCase(unittest.TestCase):
         linked_list1 = LinkedList()
         linked_list1.add_in_tail(Node(6))
         linked_list1.add_in_tail(Node(7))
-        linked_list1.add_in_tail(Node(7))
+        linked_list1.add_in_tail(Node(9))
 
         linked_list2 = LinkedList()
         linked_list2.add_in_tail(Node(6))
         linked_list2.add_in_tail(Node(7))
-        linked_list2.add_in_tail(Node(7))
+        linked_list2.add_in_tail(Node(1))
 
         ans = task1_8(linked_list1, linked_list2)
-        self.assertEqual(ans[0], 12)
-        self.assertEqual(ans[1], 14)
+        self.assertEqual(ans.head.value, 12)
+        self.assertEqual(ans.head.next.value, 14)
+        self.assertEqual(ans.head.next.next.value, 10)
+
         linked_list1.add_in_tail(Node(5))
         ans = task1_8(linked_list1, linked_list2)
-        self.assertEqual(len(ans), 0)
+        self.assertIs(ans, None)
