@@ -48,11 +48,3 @@ class MyTestCase(unittest.TestCase):
         array = DynArray()
         with self.assertRaises(IndexError):
             array.delete(1)
-
-    def test_delete_dynamic_array(self):
-        array = DynArray()
-        for i in range(40):
-            array.append(20)
-
-        for i in range(38):
-            array.delete(0)
