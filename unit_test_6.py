@@ -21,3 +21,4 @@ class MyTestCase(unittest.TestCase):
         deque.addTail(2)
         self.assertEqual(deque.removeFront(), 6)
         self.assertEqual(deque.removeTail(), 2)
+        self.assertEqual(deque.size(), 2)
