@@ -20,4 +20,4 @@ class Deque:
         return self.list.pop()  # если очередь пуста
 
     def size(self):
-        return len(list)  # размер очереди
+        return len(self.list)  # размер очереди
