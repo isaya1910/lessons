@@ -17,13 +17,13 @@ class OrderedList:
         if v1 > v2: return 1
         return 0
 
-    def add_tail(self, node):
+    def __add_tail(self, node):
         temp = self.tail
         self.tail = node
         node.prev = temp
         temp.next = node
 
-    def add_head(self, node):
+    def __add_head(self, node):
         temp = self.head
         self.head = node
         node.next = temp
@@ -63,9 +63,9 @@ class OrderedList:
                                                                                                   node.value) == 0):
                     it = it.prev
                 if it is None:
-                    self.add_head(node)
+                    self.__add_head(node)
                 elif it is self.tail:
-                    self.add_tail(node)
+                    self.__add_tail(node)
                 else:
                     temp = it
                     node.prev = temp
@@ -79,9 +79,9 @@ class OrderedList:
                         self.compare(it.value, node.value) == 1 or self.compare(it.value, node.value) == 0):
                     it = it.next
                 if it is None:
-                    self.add_tail(node)
+                    self.__add_tail(node)
                 elif it is self.head:
-                    self.add_head(node)
+                    self.__add_head(node)
                 else:
                     temp = it
                     node.next = temp
@@ -142,3 +142,21 @@ class OrderedList:
             r.append(node)
             node = node.next
         return r
+
+
+class OrderedStringList(OrderedList):
+    def __init__(self, asc):
+        super(OrderedStringList, self).__init__(asc)
+
+    def compare(self, v1, v2):
+        trim_string1 = v1.rstrip()
+        trim_string1 = trim_string1.lstrip()
+
+        trim_string2 = v2.rstrip()
+        trim_string2 = trim_string2.lstrip()
+
+        if trim_string1 > trim_string2:
+            return 1
+        if trim_string1 < trim_string2:
+            return -1
+        return 0
