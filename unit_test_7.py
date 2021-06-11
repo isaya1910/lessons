@@ -22,17 +22,23 @@ class MyTestCase(unittest.TestCase):
 
     def test_ordered_list_decreasing_order(self):
         ordered_list = OrderedList(False)
-        n = 100
+        n = 2
         list = []
         for i in range(n):
             integer = randrange(1000)
             list.append(integer)
             ordered_list.add(integer)
+            self.assertIsNotNone(ordered_list.head)
+
+        self.assertIsNotNone(ordered_list.tail)
         list.sort(reverse=True)
         list_from_ordered_list = ordered_list.get_all()
 
         for k in range(n):
             self.assertEqual(list[k], list_from_ordered_list[k].value)
+
+        self.assertIsNotNone(ordered_list.tail)
+        self.assertIsNotNone(ordered_list.head)
 
     def test_ordered_list_delete(self):
         ordered_list = OrderedList(False)
