@@ -33,6 +33,8 @@ class MyTestCase(unittest.TestCase):
     def test_ordered_list_decreasing_order(self):
         ordered_list = OrderedList(False)
         ordered_list.add(5)
+        self.assertEqual(ordered_list.head.value, 5)
+        self.assertIsNone(ordered_list.tail)
         ordered_list.add(7)
         self.assertEqual(ordered_list.head.value, 7)
         self.assertEqual(ordered_list.tail.value, 5)
