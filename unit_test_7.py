@@ -14,6 +14,8 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(ordered_list.tail.value, 7)
         ordered_list.clean(True)
         ordered_list.add(7)
+        self.assertEqual(ordered_list.head.value, 7)
+        self.assertIsNone(ordered_list.tail)
         ordered_list.add(5)
         self.assertEqual(ordered_list.head.value, 5)
         self.assertEqual(ordered_list.tail.value, 7)
@@ -26,15 +28,6 @@ class MyTestCase(unittest.TestCase):
         ordered_list.add(100)
         self.assertEqual(ordered_list.tail.value, 100)
         ordered_list.add(3)
-        print(*ordered_list.get_all_values())
-
-        #   self.assertEqual(ordered_list.head.next.value, 3)
-        print(ordered_list.tail.value)
-        print(*ordered_list.get_all_values())
-
-        print(ordered_list.tail.prev.value)
-        #    ordered_list.add(99)
-        #   self.assertEqual(ordered_list.tail.prev.value, 99)
         print(*ordered_list.get_all_values())
 
     def test_ordered_list_decreasing_order(self):
