@@ -119,24 +119,22 @@ class OrderedList:
             node = node.next
 
     def delete(self, val):
-        temp = self.head
-
-        if temp is not None:
-            if temp.value == val:
-                self.head = temp.next
-                temp.prev = None
+        node = self.head
+        while node is not None:
+            if node.value == val:
+                prev = node.prev
+                next = node.next
+                if prev is not None:
+                    prev.next = next
+                    if next is not None:
+                        next.prev = prev
+                else:
+                    self.head = next
+                    if next is not None:
+                        next.prev = None
                 self.update_tail()
                 return
-        while temp is not None:
-            if temp.value == val:
-                break
-            temp = temp.next
-        if temp is None:
-            return
-        temp.prev.next = temp.next
-        if temp.next is not None:
-            temp.next.prev = temp.prev
-        self.update_tail()
+            node = node.next
 
     def clean(self, asc):
 
