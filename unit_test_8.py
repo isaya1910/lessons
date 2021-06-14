@@ -6,7 +6,7 @@ from mytest8 import HashTable
 class MyTestCase(unittest.TestCase):
     def test_hash_fun(self):
         self.assertEqual(9, 9)
-        hash_table = HashTable(19, 3)
+        hash_table = HashTable(300, 3)
 
         for i in "qwertyuiopasdfghjklzxcvbnm":
             print((hash_table.hash_fun(i)))
@@ -27,6 +27,7 @@ class MyTestCase(unittest.TestCase):
         for i in "qwertyuiopasdfghjklzxcvbnm":
             hash_table.put(i)
         self.assertIsNone(hash_table.seek_slot("m"), None)
+        self.assertIsNone()
 
     def test_seek_slut(self):
         hash_table = HashTable(19, 3)
