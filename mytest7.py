@@ -27,6 +27,7 @@ class OrderedList:
         new_node = Node(data)
         if self.head is None:
             self.head = new_node
+            self.tail = new_node
             return
 
         if self.head.next is None:
@@ -66,6 +67,7 @@ class OrderedList:
         new_node = Node(data)
         if self.head is None:
             self.head = new_node
+            self.tail = new_node
             return
 
         if self.head.next is None:
