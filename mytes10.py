@@ -20,7 +20,10 @@ class PowerSet:
 
     def remove(self, value):
         # возвращает True если value удалено
-        return self.dict.pop(value) is not None
+        if self.get(value):
+            self.dict.pop(value)
+            return True
+        return False
 
     def intersection(self, set2):
         ans = PowerSet()
