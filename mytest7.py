@@ -111,6 +111,13 @@ class OrderedList:
             node = node.next
         return None
 
+    def update_tail(self):
+        node = self.head
+        self.tail = self.head
+        while node is not None:
+            self.tail = node
+            node = node.next
+
     def delete(self, val):
         temp = self.head
 
@@ -118,6 +125,7 @@ class OrderedList:
             if temp.value == val:
                 self.head = temp.next
                 temp.prev = None
+                self.update_tail()
                 return
         while temp is not None:
             if temp.value == val:
@@ -128,10 +136,7 @@ class OrderedList:
         temp.prev.next = temp.next
         if temp.next is not None:
             temp.next.prev = temp.prev
-        if temp is self.tail:
-            self.tail = self.tail.prev
-            if self.tail == self.head:
-                self.tail = None
+        self.update_tail()
 
     def clean(self, asc):
 

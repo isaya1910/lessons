@@ -92,7 +92,7 @@ class MyTestCase(unittest.TestCase):
 
         ordered_list.delete(100)
         self.assertEqual(ordered_list.head.value, 6)
-        self.assertIsNone(ordered_list.tail)
+        self.assertEqual(ordered_list.tail.value, 6)
 
         ordered_list.add(111)
         self.assertEqual(ordered_list.tail.value, 111)
@@ -103,7 +103,19 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(ordered_list.head.value, 6)
         self.assertEqual(ordered_list.tail.value, 111)
 
-    def test_ordered_list_delete(self):
+    def test_delete(self):
+        ordered_list = OrderedList(True)
+        ordered_list.add(5)
+        ordered_list.delete(5)
+        self.assertIsNone(ordered_list.head)
+        self.assertIsNone(ordered_list.tail)
+        ordered_list.add(7)
+        ordered_list.add(8)
+        ordered_list.add(9)
+        ordered_list.delete(9)
+        self.assertEqual(ordered_list.tail.value, 8)
+
+    def test_random_ordered_list_delete(self):
         ordered_list = OrderedList(True)
         n = 100
         list = []
