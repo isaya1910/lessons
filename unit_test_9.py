@@ -18,5 +18,11 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(value2, 999)
         self.assertEqual(dict.is_key("vvv"), False)
         dict.put("vvv", 123)
+        self.assertEqual(dict.is_key("eee"), False)
+        self.assertEqual(dict.is_key("rrr"), False)
+        dict.put("ddd", 1233)
+        self.assertEqual(dict.is_key("ddd"), True)
+        self.assertEqual(dict.get("ddd"), 1233)
+
         self.assertEqual(dict.is_key("vvv"), True)
         self.assertEqual(dict.get("vvv"), 123)

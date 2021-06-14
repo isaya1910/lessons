@@ -11,8 +11,10 @@ class NativeDictionary:
         return (len(value) * total) % self.size
 
     def is_key(self, key):
-        index = self.hash_fun(key)
-        return self.slots[index] is not None
+        for slot in self.slots:
+            if slot == key:
+                return True
+        return False
 
     def put(self, key, value):
         index = self.hash_fun(key)
