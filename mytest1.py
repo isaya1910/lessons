@@ -33,14 +33,15 @@ class LinkedList:
             node = node.next
         return None
 
+    # ans --> all_nodes
     def find_all(self, node_value):
-        ans = []
+        all_nodes = []
         node = self.head
         while node is not None:
             if node.value == node_value:
-                ans.append(node)
+                all_nodes.append(node)
             node = node.next
-        return ans  # здесь будет ваш код
+        return all_nodes  # здесь будет ваш код
 
     def update_tail(self):
         node = self.head
