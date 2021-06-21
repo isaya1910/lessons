@@ -3,10 +3,11 @@ import ctypes
 
 class DynArray:
 
+    # array --> capacity_array
     def __init__(self):
         self.count = 0
         self.capacity = 16
-        self.array = self.make_array(self.capacity)
+        self.capacity_array = self.make_array(self.capacity)
 
     def __len__(self):
         return self.count
@@ -23,13 +24,13 @@ class DynArray:
         new_array = self.make_array(new_capacity)
         for i in range(self.count):
             new_array[i] = self.array[i]
-        self.array = new_array
+        self.capacity_array = new_array
         self.capacity = new_capacity
 
     def append(self, itm):
         if self.count == self.capacity:
             self.resize(2 * self.capacity)
-        self.array[self.count] = itm
+        self.capacity_array[self.count] = itm
         self.count += 1
 
     def insert(self, i, itm):
@@ -40,18 +41,19 @@ class DynArray:
             self.resize(2 * self.capacity)
         self.count = self.count + 1
         for j in range(self.count - 1, i, -1):
-            self.array[j] = self.array[j - 1]
-        self.array[i] = itm
+            self.capacity_array[j] = self.capacity_array[j - 1]
+        self.capacity_array[i] = itm
 
+    # percent--> capacity_percent
     def delete(self, i):
         if i < 0 or i >= self.count:
             raise IndexError('Index is out of bounds')
 
         for j in range(i, self.count - 1):
-            self.array[j] = self.array[j + 1]
+            self.capacity_array[j] = self.capacity[j + 1]
         self.count = self.count - 1
-        percent = self.count / self.capacity
-        if percent < 0.5:
+        capacity_percent = self.count / self.capacity
+        if capacity_percent < 0.5:
             new_capacity = int((self.capacity * 2) / 3)
             if new_capacity >= 16:
                 self.capacity = new_capacity

@@ -1,20 +1,21 @@
 class Stack:
+    # stack --> items
     def __init__(self):
-        self.stack = []
+        self.items = []
 
     def size(self):
-        return len(self.stack)
+        return len(self.items)
 
     def pop(self):
         # ваш код
-        if len(self.stack) > 0:
-            return self.stack.pop()
+        if len(self.items) > 0:
+            return self.items.pop()
         return None  # если стек пустой
 
     def push(self, value):
-        self.stack.append(value)
+        self.items.append(value)
 
     def peek(self):
-        if len(self.stack) > 0:
-            return self.stack[len(self.stack) - 1]
+        if len(self.items) > 0:
+            return self.items[len(self.items) - 1]
         return None
