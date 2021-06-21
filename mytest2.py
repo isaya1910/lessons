@@ -25,12 +25,13 @@ class LinkedList2(LinkedListParent):
     def get_tail(self):
         return self._dummy_tail.prev
 
-    def add_in_tail(self, item):
+    # item --> new_node
+    def add_in_tail(self, new_node):
         old_tail = self.get_tail()
-        old_tail.next = item
-        item.prev = old_tail
-        self._dummy_tail.prev = item
-        item.next = self._dummy_tail
+        old_tail.next = new_node
+        new_node.prev = old_tail
+        self._dummy_tail.prev = new_node
+        new_node.next = self._dummy_tail
         self.length = self.length + 1
 
     def find(self, val):
@@ -41,19 +42,21 @@ class LinkedList2(LinkedListParent):
             node = node.next
         return None
 
-    def find_all(self, val):
+    # ans --> nodes val-->node_value_to_delete
+    def find_all(self, nodes_value_to_find):
         node = self._dummy_head.next
-        ans = []
+        nodes = []
         while node is not None:
-            if node.value == val:
-                ans.append(node)
+            if node.value == nodes_value_to_find:
+                nodes.append(node)
             node = node.next
-        return ans
+        return nodes
 
-    def delete(self, val, all=False):
+    # val --> node_value_to_delete
+    def delete(self, node_value_to_delete, all=False):
         node = self._dummy_head.next
         while node is not None:
-            if node.value == val:
+            if node.value == node_value_to_delete:
                 prev_node = node.prev
                 next_node = node.next
                 prev_node.next = next_node
