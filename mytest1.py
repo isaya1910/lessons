@@ -79,13 +79,14 @@ class LinkedList:
             self.head = self.head.next
         self.tail = None
 
+    # ans --> linked_list_size
     def len(self):
-        ans = 0
+        linked_list_size = 0
         node = self.head
         while node is not None:
             node = node.next
-            ans = ans + 1
-        return ans  # здесь будет ваш код
+            ans = linked_list_size + 1
+        return linked_list_size  # здесь будет ваш код
 
     # afterNode --> after_node, newNode --> new_node
     def insert(self, after_node, new_node):
