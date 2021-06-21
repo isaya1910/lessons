@@ -6,10 +6,11 @@ class Node:
 
 
 class OrderedList:
-    def __init__(self, asc):
+    # __ascending --> __is_ascending
+    def __init__(self, __is_ascending):
         self.head = None
         self.tail = None
-        self.__ascending = asc
+        self.__is_ascending = __is_ascending
         self.size = 0
 
     def compare(self, v1, v2):
@@ -18,7 +19,7 @@ class OrderedList:
         return 0
 
     def add(self, value):
-        if self.__ascending:
+        if self.__is_ascending:
             self.asc_ordered_list(value)
         else:
             self.desc_ordered_list(value)
@@ -31,37 +32,40 @@ class OrderedList:
             return
 
         if self.head.next is None:
+            # temp --> old_head
             if self.compare(self.head.value, data) == 1:
-                temp = self.head
+                old_head = self.head
                 self.head = new_node
-                self.tail = temp
-                new_node.next = temp
-                temp.prev = new_node
+                self.tail = old_head
+                new_node.next = old_head
+                old_head.prev = new_node
             else:
                 self.head.next = new_node
                 new_node.prev = self.head
                 self.tail = new_node
             return
-        temp = self.head
-        while temp is not None:
-            if self.compare(temp.value, data) == 1:
+        # temp --> node_iteration
+        node_iteration = self.head
+        while node_iteration is not None:
+            if self.compare(node_iteration.value, data) == 1:
                 break
-            temp = temp.next
-        if temp is None:
+            node_iteration = node_iteration.next
+        if node_iteration is None:
             old_tail = self.tail
             old_tail.next = new_node
             new_node.prev = old_tail
             self.tail = new_node
             return
 
-        tt = temp.prev
-        temp.prev = new_node
-        new_node.prev = tt
-        if tt is not None:
-            tt.next = new_node
+        # tt --< previous_node
+        previous_node = node_iteration.prev
+        node_iteration.prev = new_node
+        new_node.prev = previous_node
+        if previous_node is not None:
+            previous_node.next = new_node
         else:
             self.head = new_node
-        new_node.next = temp
+        new_node.next = node_iteration
 
     def desc_ordered_list(self, data):
         new_node = Node(data)
@@ -72,36 +76,38 @@ class OrderedList:
 
         if self.head.next is None:
             if self.compare(self.head.value, data) == -1:
-                temp = self.head
+                # temp --> old_head
+                old_head = self.head
                 self.head = new_node
-                self.tail = temp
-                new_node.next = temp
-                temp.prev = new_node
+                self.tail = old_head
+                new_node.next = old_head
+                old_head.prev = new_node
             else:
                 self.head.next = new_node
                 new_node.prev = self.head
                 self.tail = new_node
             return
-        temp = self.head
-        while temp is not None:
-            if self.compare(temp.value, data) == -1:
+        # temp --> node_iteration
+        node_iteration = self.head
+        while node_iteration is not None:
+            if self.compare(node_iteration.value, data) == -1:
                 break
-            temp = temp.next
-        if temp is None:
+            node_iteration = node_iteration.next
+        if node_iteration is None:
             old_tail = self.tail
             old_tail.next = new_node
             new_node.prev = old_tail
             self.tail = new_node
             return
-
-        tt = temp.prev
-        temp.prev = new_node
-        new_node.prev = tt
-        if tt is not None:
-            tt.next = new_node
+        # tt --< previous_node
+        previous_node = node_iteration.prev
+        node_iteration.prev = new_node
+        new_node.prev = previous_node
+        if previous_node is not None:
+            previous_node.next = new_node
         else:
             self.head = new_node
-        new_node.next = temp
+        new_node.next = node_iteration
 
     def find(self, val):
         node = self.head
@@ -118,27 +124,29 @@ class OrderedList:
             self.tail = node
             node = node.next
 
+    # prev --> previous_node
+    # next --> next_node
     def delete(self, val):
         node = self.head
         while node is not None:
             if node.value == val:
-                prev = node.prev
-                next = node.next
-                if prev is not None:
-                    prev.next = next
-                    if next is not None:
-                        next.prev = prev
+                previous_node = node.prev
+                next_node = node.next
+                if previous_node is not None:
+                    previous_node.next = next_node
+                    if next_node is not None:
+                        next_node.prev = previous_node
                 else:
-                    self.head = next
-                    if next is not None:
-                        next.prev = None
+                    self.head = next_node
+                    if next_node is not None:
+                        next_node.prev = None
                 self.update_tail()
                 return
             node = node.next
 
     def clean(self, asc):
 
-        self.__ascending = asc
+        self.__is_ascending = asc
         self.head = None
         self.tail = None
 
