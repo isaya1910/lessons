@@ -24,19 +24,20 @@ class LinkedList:
             print(node.value)
             node = node.next
 
-    def find(self, val):
+    # val --> node_value
+    def find(self, node_value):
         node = self.head
         while node is not None:
-            if node.value == val:
+            if node.value == node_value:
                 return node
             node = node.next
         return None
 
-    def find_all(self, val):
+    def find_all(self, node_value):
         ans = []
         node = self.head
         while node is not None:
-            if node.value == val:
+            if node.value == node_value:
                 ans.append(node)
             node = node.next
         return ans  # здесь будет ваш код
@@ -48,10 +49,10 @@ class LinkedList:
             self.tail = node
             node = node.next
 
-    def delete(self, val, all=False):
+    def delete(self, node_value, all=False):
         node = self.head
         prev = None
-        while node is not None and node.value == val:
+        while node is not None and node.value == node_value:
             self.head = node.next
             node = self.head
             if not all:
@@ -59,7 +60,7 @@ class LinkedList:
                 return
 
         while node is not None:
-            while node is not None and node.value != val:
+            while node is not None and node.value != node_value:
                 prev = node
                 node = node.next
             if node is None:
@@ -85,17 +86,18 @@ class LinkedList:
             ans = ans + 1
         return ans  # здесь будет ваш код
 
-    def insert(self, afterNode, newNode):
+    # afterNode --> after_node, newNode --> new_node
+    def insert(self, after_node, new_node):
         node = self.head
-        if afterNode is None:
-            self.head = newNode
+        if after_node is None:
+            self.head = new_node
             if node is not None:
                 self.head.next = node
         else:
             while node is not None:
-                if node is afterNode:
+                if node is after_node:
                     temp = node.next
-                    node.next = newNode
-                    newNode.next = temp
+                    node.next = new_node
+                    new_node.next = temp
                 node = node.next
         self.update_tail()

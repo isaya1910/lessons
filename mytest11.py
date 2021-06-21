@@ -4,18 +4,6 @@ class BloomFilter:
         self.filter_len = f_len
         # создаём битовый массив длиной f_len ...
         self.bit_array = [0] * self.filter_len
-    #
-    # def hash1(self, value):
-    #     total = 0
-    #     for i in range(len(value)):
-    #         total += ord(value[i]) * (7 ** i)
-    #     return (len(value) * total) % self.filter_len
-    #
-    # def hash2(self, value):
-    #     total = 0
-    #     for i in range(len(value)):
-    #         total += ord(value[i]) * (13 ** i)
-    #     return (len(value) * total) % self.filter_len
 
     def hash1(self, str1):
         # 17
